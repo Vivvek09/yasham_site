@@ -1,0 +1,82 @@
+<template>
+    <div class="onboarding">
+        <img id="onboarding-bg" class="onboarding-bg" src="@/assets/landing.jpg" />
+        <div class="onboarding-inner">
+            <div class="onboarding-content slide-in-left">
+                <span style="font-weight: 700; font-size: 20px;">We are</span>
+                <span style="font-weight: 700; font-size: 40px; color: var(--color-primary);">Yasham </span>
+                <span style="font-weight: 700; font-size: 40px;">Foundation</span>
+                <span style="font-weight: 500; font-size: 18px; margin-top: 16px;">We educate, enlighten and empower the future generations through holistic education.</span>
+                <router-link class="bigbtn" style="margin-top: 32px;" to="about">Learn More</router-link>
+            </div>
+        </div>
+        
+    </div>
+</template>
+
+<script>
+    export default {
+        mounted: ()=>{
+            let element = document.getElementById("onboarding-bg");
+            window.addEventListener('scroll', function(){
+                element.style.transform = `scale(${1+Math.min(1,0.1 * window.scrollY/window.innerHeight)})`;
+            });
+        },
+
+    }
+    
+</script>
+
+<style scoped>
+
+    .onboarding{
+        width: 100%;
+        height: calc(100% - 84px);
+        background-size: cover;
+        background-position: center;
+    }
+
+    .onboarding-bg{
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        z-index: -1;
+        object-fit: cover;
+        object-position: center;
+        top: 0;
+        transform: scale(1);
+    }
+
+    .onboarding-inner{
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
+        color: #FFF;
+        justify-content: center;
+        padding: 0px 180px;
+        transition: all 0.25s;
+        position: relative;
+        z-index: 1;
+    }
+    .onboarding-content{
+        max-width: 480px;
+        
+    }
+    .onboarding-content span{
+        display: block;
+    }
+
+    @media screen and (max-width: 840px) {
+        .onboarding-inner{
+            padding: 0px 84px;
+            align-items: center;
+        }
+
+        .onboarding-content{
+            text-align: center;
+            align-items: center;
+        }
+    }
+</style>
