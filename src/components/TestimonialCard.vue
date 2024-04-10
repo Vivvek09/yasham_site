@@ -8,7 +8,7 @@
         "
       />
       <div class="profile">
-        <h5>{{ item.full_name }}</h5>
+        <h5>{{ item.name }}</h5>
         <p>{{ item.role }}</p>
       </div>
     </div>
@@ -50,6 +50,7 @@ export default {
   background-color: white;
   overflow: auto;
   border-radius: 7px;
+  margin-right:10px;
 }
 
 .card-header {

@@ -21,7 +21,7 @@
         height: 84px;
         padding: 0px 20px;
         transition: all 0.25s;
-        z-index: 999;
+        z-index: 0;
         color: #FFF;
         /* background: rgba(0,0,0,0.5); */
         background: var(--color-gradient);

@@ -26,7 +26,7 @@
     * {
         box-sizing: border-box;
         position: relative;
-        z-index: 1;
+       
     }
 
     a {

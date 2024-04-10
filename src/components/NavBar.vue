@@ -1,57 +1,97 @@
 <template>
-  <div id="navholder" mnav-active="false">
-    <div id="navbar">
-      <router-link to="/"
-        ><img class="navlogo" src="../assets/images/logo_icon.png"
-      /></router-link>
-      <router-link
-        to="/contact"
-        v-bind:selected="selecteditem == 'contact'"
-        class="navbtn"
-        >Contact</router-link
-      >
-      <router-link
-        to="/support-us"
-        v-bind:selected="selecteditem == 'support'"
-        class="navbtn"
-        >Support Us</router-link
-      >
-      <router-link
-        to="/our-impact"
-        v-bind:selected="selecteditem == 'impact'"
-        class="navbtn"
-        >Our Impact</router-link
-      >
-      <router-link
-        to="/what-we-do"
-        v-bind:selected="selecteditem == 'work'"
-        class="navbtn"
-        >What We Do</router-link
-      >
-      <router-link
-        to="/about"
-        v-bind:selected="selecteditem == 'about'"
-        class="navbtn"
-        >About Us</router-link
-      >
-      <router-link
-        to="/"
-        v-bind:selected="selecteditem == 'home'"
-        class="navbtn"
-        >Home</router-link
-      >
-      <a class="mnavbtn" v-on:click="toggleNav">
-        <img inactive width="48" src="../assets/images/ic_mnav.png" />
-        <img active width="48" src="../assets/images/ic_mnav_close.png" />
+  <div id="navholder" :mnav-active="mnavActive">
+    <div id="navbar" class="navbar">
+      <router-link to="/"><img src="../assets/images/yasham_logo2.png" class="navlogo" /></router-link> 
+      <div>
+        <router-link to="/contact" class="navbtn">Contact Us</router-link>
+        <div class="dropdown">
+          <span class="navbtn">Our Story</span>
+          <div class="dropdown-content">
+            <router-link to="/our-team" class="mnav-item">Our Team</router-link>
+            <router-link to="/our-mission" class="mnav-item"
+              >Our Mission</router-link
+            >
+            <router-link to="/founders-vision" class="mnav-item"
+              >Founder's Vision</router-link
+            >
+          </div>
+        </div>
+        <div class="dropdown">
+          <span class="navbtn">Our Work</span>
+          <div class="dropdown-content">
+            <router-link to="/programmes/centre-model" class="mnav-item"
+              >Yasham Centre Model</router-link
+            >
+            <router-link to="/programmes/saathi-haath-badhana" class="mnav-item"
+              >Saathi Haath Badhana</router-link
+            >
+            <router-link to="/programmes/sunn-zara" class="mnav-item"
+              >Sunn Zara</router-link
+            >
+            <router-link to="/programmes/hum-honge-kamyab" class="mnav-item"
+              >Hum Honge Kaamyab</router-link
+            >
+            <router-link to="/programmes/swachh-english-mission" class="mnav-item"
+              >Swacch English Mission</router-link
+            >
+          </div>
+        </div>
+        <div class="dropdown">
+          <span class="navbtn">Our Impact</span>
+          <div class="dropdown-content">
+            <router-link to="/student-testimonials" class="mnav-item"
+              >Student Testimonials</router-link
+            >
+            <router-link to="/mentor-testimonials" class="mnav-item"
+              >Mentor Testimonials</router-link
+            >
+            <router-link to="/yasham-in-news" class="mnav-item"
+              >Yasham in News</router-link
+            >
+          </div>
+        </div>
+        <div class="dropdown">
+          <span class="navbtn">Get Involved</span>
+          <div class="dropdown-content">
+            <div class="sub-dropdown">
+              <span class="mnav-item">Sponsor</span>
+            </div>
+            <router-link to="/volunteer-intern" class="mnav-item"
+              >Volunteer & Intern</router-link
+            >
+            <router-link to="/teach" class="mnav-item">Teach</router-link>
+            <router-link to="/mentor" class="mnav-item">Mentor</router-link>
+          </div>
+        </div>
+      </div>
+      <a class="mnavbtn" @click="toggleNav">
+        <i
+          :class="
+            mnavActive ? 'fas fa-times icon fa-xs' : 'fas fa-bars icon fa-xs'
+          "
+        ></i>
       </a>
     </div>
     <div id="mnav">
-      <router-link to="/" class="mnav-item">Home</router-link>
-      <router-link to="/about" class="mnav-item">About Us</router-link>
-      <router-link to="/what-we-do" class="mnav-item">What We Do</router-link>
-      <router-link to="/our-impact" class="mnav-item">Our Impact</router-link>
-      <router-link to="/support-us" class="mnav-item">Support Us</router-link>
-      <router-link to="/contact" class="mnav-item">Contact</router-link>
+      <router-link to="/contact" class="mnav-item">Home</router-link>
+      <div class="dropdown" v-for="(section, index) in sections" :key="index">
+        <span class="mnav-item" @click="toggleDropdown(section.name)">
+          {{ section.name }} <i class="fas fa-chevron-down"></i>
+        </span>
+        <div
+          class="dropdown-content"
+          :class="{ active: activeDropdown === section.name }"
+        >
+          <router-link
+            v-for="(link, idx) in section.links"
+            :key="idx"
+            :to="link.route"
+            class="mnav-item2"
+          >
+            {{ link.label }}
+          </router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -59,24 +99,71 @@
 <script>
 export default {
   name: "NavBar",
-  props: {
-    selecteditem: String,
+  data() {
+    return {
+      mnavActive: false,
+      activeDropdown: null,
+      sections: [
+        {
+          name: "Our Story",
+          links: [
+            { label: "Our Team", route: "/our-team" },
+            { label: "Our Mission", route: "/our-mission" },
+            { label: "Founder's Vision", route: "/founders-vision" },
+          ],
+        },
+        {
+          name: "Our Work",
+          links: [
+            { label: "Yasham Centre Model", route: "/yasham-centre-model" },
+            { label: "Saathi Haath Badhana", route: "/saathi-haath-badhana" },
+            { label: "Sunn Zara", route: "/sunn-zara" },
+            { label: "Hum Honge Kaamyab", route: "/hum-honge-kamyab" },
+            {
+              label: "Swacch English Mission",
+              route: "/swachh-english-mission",
+            },
+          ],
+        },
+        {
+          name: "Our Impact",
+          links: [
+            { label: "Testimonials", route: "/testimonials" },
+            { label: "Yasham in News", route: "/yasham-in-news" },
+          ],
+        },
+        {
+          name: "Get Involved",
+          links: [
+            { label: "Sponsor a Student", route: "/sponsor-a-student" },
+            { label: "Sponsor a Project", route: "/sponsor-a-project" },
+            { label: "Sponsor in Kind", route: "/sponsor-in-kind" },
+            { label: "Sponsor in Donation", route: "/sponsor-in-donation" },
+            { label: "Volunteer & Intern", route: "/volunteer-intern" },
+            { label: "Teach", route: "/teach" },
+            { label: "Mentor", route: "/mentor" },
+          ],
+        },
+      ],
+    };
   },
   methods: {
     toggleNav() {
-      var navholder = document.getElementById("navholder");
-      navholder.setAttribute(
-        "mnav-active",
-        navholder.getAttribute("mnav-active") == "true" ? "false" : "true"
-      );
+      this.mnavActive = !this.mnavActive;
+    },
+    toggleDropdown(sectionName) {
+      this.activeDropdown =
+        this.activeDropdown === sectionName ? null : sectionName;
     },
   },
 };
 </script>
 
 <style scoped>
+/* Add your scoped styles here */
+
 #navholder {
-  z-index: 999;
+  z-index: 20;
 }
 
 #navbar {
@@ -85,22 +172,34 @@ export default {
   background: #fff;
   padding: 0px 96px;
   transition: all 0.25s;
-  z-index: 999;
+  z-index: 20;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .navlogo {
-  height: 84px;
-  padding: 16px;
+  height: 130px;
+  width: 110px;
+  padding: 10px;
   float: left;
+  
 }
 
 .mnavbtn {
-  height: 84px;
+  font-size: 2rem;
+  font-weight: 600;
   line-height: 84px;
   float: right;
-  padding: 18px;
   cursor: pointer;
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-primary);
+}
+
+.icon {
+  color: var(--color-primary);
 }
 
 #mnav {
@@ -112,7 +211,7 @@ export default {
   transition: all 0.25s;
   transform-origin: 0px 0px;
   display: none;
-  z-index: 999;
+  z-index: 30;
 }
 
 .mnav-item {
@@ -126,6 +225,22 @@ export default {
   border-top: solid #00000010 1px;
   cursor: pointer;
   transition: all 0.25s;
+  background-color: #fff;
+  z-index: 2;
+}
+.mnav-item2 {
+  width: 100%;
+  padding: 24px 32px;
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color:black;
+  border-top: solid #00000010 1px;
+  cursor: pointer;
+  transition: all 0.25s;
+  background-color: rgb(255, 250, 245);
+  z-index: 2;
 }
 
 .mnav-item:hover {
@@ -207,21 +322,9 @@ export default {
   }
   .mnavbtn {
     display: block;
-  }
-  #navholder[mnav-active="false"] .mnavbtn img[inactive] {
-    display: block;
-  }
+    position: absolute;
 
-  #navholder[mnav-active="false"] .mnavbtn img[active] {
-    display: none;
-  }
-
-  #navholder[mnav-active="true"] .mnavbtn img[inactive] {
-    display: none;
-  }
-
-  #navholder[mnav-active="true"] .mnavbtn img[active] {
-    display: block;
+    right: 10px;
   }
 
   #mnav {
@@ -234,6 +337,114 @@ export default {
 
   #navholder[mnav-active="false"] #mnav {
     transform: scaleY(0);
+  }
+
+  .navlogo{
+    height: 105px;
+    width: 110px;
+    padding: 5px;
+    padding-top:0px;
+    padding-left:25px;
+  }
+}
+#navholder {
+  position: relative;
+  z-index: 20;
+}
+
+#navbar {
+  width: 100%;
+  height: 84px;
+  background: #fff;
+  padding: 0px 96px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbtn {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  border-radius: 30px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  /* border-bottom: 1px solid black; */
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow:clip;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure dropdown is above other elements */
+}
+.dropdown-content span,
+.dropdown-content a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.dropdown-content span:hover,
+.dropdown-content a:hover {
+  /* background-color: #f76f020b; */
+  color: var(--color-primary);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.mnavbtn {
+  display: none;
+}
+
+@media screen and (max-width: 840px) {
+  #navbar {
+    padding: 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbtn {
+    display: none;
+  }
+
+  .mnavbtn {
+    display: block;
+    margin-right: 16px;
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-content {
+    top: auto;
+    left: 0;
+    right: 0;
+
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: none;
+  }
+
+  .dropdown:hover .dropdown-content.active {
+    display: block;
   }
 }
 </style>

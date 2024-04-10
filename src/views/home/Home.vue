@@ -3,12 +3,8 @@
     <NavBar selecteditem="home" />
     <Landing />
     <WaveDivider background="rgba(0,0,0,0.5)"></WaveDivider>
-    <div class="subsection mob-center scroll-reveal">
-      <h2>
-        <i class="fas fa-school text-gradient" style="padding-right: 16px"></i
-        >Vision & Mission
-      </h2>
-      <span class="underbar"></span>
+    <div class="subsection mob-center scroll-reveal" style="padding-top: 35px;">
+      
       <div class="about">
         <iframe
           src="https://www.youtube.com/embed/NpEaa2P7qZI"
@@ -52,7 +48,7 @@
     <div class="subsection mob-center scroll-reveal">
       <h2>
         <i class="fas fa-school text-gradient" style="padding-right: 16px"></i
-        >Recent Programmes
+        >Our Programmes
       </h2>
       <span class="underbar"></span>
       <div class="cards-holder">
@@ -184,6 +180,8 @@ h2 {
   margin: 16px 16px 0px 0px;
   flex-grow: 1;
   max-width: calc(50% - 16px);
+  height: 250px;
+  border-radius: 3%;
 }
 
 @media screen and (max-width: 840px) {
@@ -193,7 +191,7 @@ h2 {
   }
   .mcard {
     margin: 16px 0px 0px 0px;
-    max-width: 540px;
+    max-width: 500px;
     width: 100%;
   }
 }

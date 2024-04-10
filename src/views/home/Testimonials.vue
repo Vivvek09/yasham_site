@@ -78,7 +78,7 @@ export default {
 @media only screen and (max-width: 600px) {
   .VueCarousel-wrapper {
     text-align: center;
-    left: 23vw;
+    left: 11vw;
   }
 }
 </style>
