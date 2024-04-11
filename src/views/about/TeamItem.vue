@@ -7,14 +7,18 @@
           :style="{ 'background-image': `url(${imageUrlFor(item.photo)})` }"
           alt="Avatar"
         ></div>
+       
       </div>
-      <div class="team-item-back">
-        <h2>{{ item.name }}</h2>
-        <p>
-          {{item.content}}
-        </p>
-      </div>
+     
+    
     </div>
+    <div >
+        <div class="heading" style="display: flex; justify-content: space-between; " >
+        <h3 style="text-align: left; margin: 0px;">{{ item.name }}</h3>
+        <h4 style="padding-right: 20px; margin: 0px;">[ROLE]</h4>
+      </div>
+        <p > {{ item.content }}</p>
+      </div>
   </div>
 </template>
 
@@ -38,39 +42,44 @@ export default {
 <style scoped>
 .team-item {
   background-color: transparent;
-  width: 320px;
-  height: 420px;
+  width: 100%;
+  align-items:flex-start;
   perspective: 1000px;
-  cursor: pointer;
-  flex-grow: 0;
+  display: flex;
+  gap: 35px;
   margin: 8px;
 }
-
+p{
+  font-family: 'Poppins'; 
+  font-weight: 300;  
+  text-align: left;
+  padding-top: 10px;
+}
 .team-item-inner {
   position: relative;
-  width: 100%;
-  height: 100%;
+ 
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
+  border-radius: 45%;
+ 
 }
 
-.team-item:hover .team-item-inner {
-  transform: rotateY(180deg);
-}
 
-.team-item-front,
-.team-item-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+
+.team-item-front {
+
+  width: 200px;
+  height: 200px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+
 }
 
 .team-item-front {
   background-color: #fff;
   color: #000;
+  
 }
 
 .team-item-img {
@@ -78,6 +87,7 @@ export default {
   height: 100%;
   background-size: cover;
   background-position: center;
+  
 }
 
 .team-item-back {
@@ -138,5 +148,19 @@ export default {
 .team-item-details:hover {
   background: var(--color-primary);
   color: #0a0e17;
+}
+
+@media screen and (max-width: 840px) {
+  .team-item{
+    display: flex;
+    flex-direction: column;
+
+  }
+  p{
+  font-family: 'Poppins'; 
+  font-weight: 200; 
+  font-size: 2.5vw; 
+  text-align: center;
+}
 }
 </style>

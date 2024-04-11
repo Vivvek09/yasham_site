@@ -16,6 +16,11 @@ export default {
             validation: Rule => Rule.required().error('Name is required.')
         },
         {
+            title: 'Role',
+            name:'role',
+            type: 'string'
+        },
+        {
             title: 'Content',
             name: 'content',
             type: 'text'

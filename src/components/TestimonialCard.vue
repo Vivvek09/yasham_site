@@ -8,7 +8,7 @@
         "
       />
       <div class="profile">
-        <h5>{{ item.name }}</h5>
+        <h5>{{ item.full_name }}</h5>
         <p>{{ item.role }}</p>
       </div>
     </div>

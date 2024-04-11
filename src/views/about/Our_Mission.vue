@@ -39,29 +39,9 @@
       </p>
     </div>
 
-    <WaveDivider position="top" foreground="#FFFFFF" background="#F5F5F5" />
 
-    <div
-      class="subsection mob-center scroll-reveal"
-      style="background: #f5f5f5"
-    >
-      <h2>
-        <i
-          class="fas fa-user-friends text-gradient"
-          style="padding-right: 16px"
-        ></i
-        >Our Team
-      </h2>
-      <span class="underbar"></span><br />
-      <div v-for="(team,index) in teamList" :key="index">
-        <h3>{{team[0].team.name}}</h3>
-        <span class="underbar"></span>
-        <div class="team-holder">
-          <TeamItem v-for="item in team" :key="item._id" :item="item" />
-        </div>
-      </div>
-    </div>
 
+    
     <!-- <WaveDivider position="top" foreground="#F5F5F5" background="#FFFFFF" /> -->
 
     <!-- <div class="subsection mob-center slide-in-left" style="background: #FFF;">
@@ -84,7 +64,7 @@
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
 import WaveDivider from "@/components/WaveDivider.vue";
-import TeamItem from "./TeamItem.vue";
+
 
 import client from "../../client";
 
@@ -93,13 +73,9 @@ export default {
     NavBar,
     Footer,
     WaveDivider,
-    TeamItem,
+ 
   },
-  data() {
-    return {
-      teamList: [],
-    };
-  },
+  
   mounted: async function () {
     const query = '*[_type == "teamMember"]{..., team->} | order(_createdAt asc)';
     const team = await client.fetch(query);

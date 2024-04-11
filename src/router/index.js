@@ -10,9 +10,19 @@ const routes = [{
         component: Home
     },
     {
-        path: '/about',
-        name: 'About',
-        component: () => import('../views/about/About.vue')
+        path: '/our-mission',
+        name: 'Our Mission',
+        component: () => import('../views/about/Our_Mission.vue')
+    },
+    {
+        path: '/founders-vision',
+        name: 'Founders Vision',
+        component: () => import('../views/about/Founders_Vision.vue')
+    },
+    {
+        path: '/our-team',
+        name: 'Our Team',
+        component: () => import('../views/about/Our_Team.vue')
     },
     {
         path: '/what-we-do',
